@@ -1,0 +1,331 @@
+ MongoDB interview questions. 
+
+### 1. **What is MongoDB, and how is it different from traditional relational databases?**
+   - MongoDB is a NoSQL, document-based database that stores data in JSON-like documents. It differs from traditional relational databases in that it doesn’t rely on tables and rows; instead, it uses collections and documents.
+   
+### 2. **What is a collection in MongoDB?**
+   - A collection in MongoDB is equivalent to a table in an RDBMS. It holds a group of MongoDB documents and doesn’t enforce any schema, which makes MongoDB flexible.
+
+### 3. **Explain the structure of a MongoDB document.**
+   - A MongoDB document is a JSON-like structure (BSON internally) with key-value pairs. Each document can have different fields, unlike a traditional row in a relational database.
+
+### 4. **How does MongoDB ensure high availability?**
+   - MongoDB uses **replica sets** for high availability. A replica set consists of a primary node and multiple secondary nodes. Data from the primary node is replicated to the secondaries, and if the primary fails, one of the secondaries can be automatically elected as the new primary.
+
+### 5. **What is sharding in MongoDB?**
+   - Sharding is MongoDB's method for distributing data across multiple servers to handle large datasets and high throughput operations. It involves dividing data into smaller, manageable pieces called shards.
+
+### 6. **What is a MongoDB index, and how does it work?**
+   - Indexes in MongoDB are similar to indexes in relational databases. They improve query performance by allowing the database to quickly locate the required data. MongoDB supports different types of indexes, such as single-field, compound, text, and hashed indexes.
+
+### 7. **What are the different types of relationships in MongoDB, and how can you model them?**
+   - MongoDB supports various types of relationships:
+     - **One-to-One**: Embedded documents or referencing.
+     - **One-to-Many**: Can be modeled using arrays or separate collections with referencing.
+     - **Many-to-Many**: Typically modeled using an array of ObjectIDs or using separate collections and linking them.
+
+### 8. **What are the advantages and disadvantages of embedding vs. referencing in MongoDB?**
+   - **Embedding** (storing related data together in the same document) can improve read performance because everything is in one place, but it may lead to large documents.
+   - **Referencing** (storing related data in different documents and referencing via ObjectIDs) keeps documents smaller and more flexible but can introduce performance overhead with joins.
+
+### 9. **How do you perform aggregation in MongoDB?**
+   - The **aggregation framework** allows you to process data records and return computed results. It works similarly to SQL's `GROUP BY` with stages like `$match`, `$group`, `$sort`, `$project`, and `$limit`.
+
+### 10. **Explain the purpose of the `$lookup` operator in MongoDB.**
+   - `$lookup` performs left outer joins between collections in MongoDB, allowing you to combine data from different collections during aggregation.
+
+### 11. **What are the ACID properties in MongoDB?**
+   - MongoDB offers **ACID transactions** within a single document by default. With version 4.0+, multi-document ACID transactions across multiple collections are also supported.
+
+### 12. **How does MongoDB handle schema design?**
+   - MongoDB is schema-less, meaning you don’t have to define a schema beforehand. However, you can enforce data structure rules using schema validation, providing more control over your data.
+
+### 13. **What are capped collections in MongoDB?**
+   - Capped collections are fixed-size collections that maintain insertion order. They automatically overwrite the oldest documents when the size limit is reached, making them useful for logging and caching.
+
+### 14. **How does MongoDB handle concurrency?**
+   - MongoDB uses a concurrency control mechanism called **document-level locking**. Unlike RDBMS systems, MongoDB locks documents rather than tables or collections, allowing more concurrency.
+
+### 15. **What is the role of the WiredTiger storage engine?**
+   - WiredTiger is the default storage engine in MongoDB. It supports features like document-level locking, data compression, and multi-threaded operations, improving performance and scalability.
+
+=============================================
+ Express.js interview questions
+
+### 1. **What is Express.js, and why is it used?**
+   - **Express.js** is a lightweight, fast, and flexible web application framework for **Node.js**. It is designed to build single-page, multi-page, and hybrid web applications and APIs. Express simplifies server-side development by providing robust features for handling HTTP requests, middleware, routing, and views.
+
+### 2. **What are the main features of Express.js?**
+   - Some key features of Express.js include:
+     - **Middleware**: Functions that execute during request processing.
+     - **Routing**: A system to define URL routes for your application.
+     - **Template engines**: It supports templating engines like Pug or EJS.
+     - **Rapid development**: Simple APIs make Express ideal for rapid development.
+     - **Static file serving**: It provides methods to serve static files such as images, CSS, etc.
+
+### 3. **Explain the role of middleware in Express.js.**
+   - **Middleware** functions in Express.js are functions that have access to the request object (`req`), the response object (`res`), and the next middleware function in the application’s request-response cycle. Middleware can:
+     - Execute code.
+     - Modify `req` and `res` objects.
+     - End the request-response cycle.
+     - Call the next middleware in the stack using `next()`.
+
+### 4. **What are the types of middleware in Express.js?**
+   - **Built-in middleware**: Middleware like `express.json()` and `express.static()`.
+   - **Third-party middleware**: Modules such as `body-parser`, `morgan`, and `cors`.
+   - **Custom middleware**: Middleware that you write yourself to handle specific logic in the app.
+
+### 5. **How does routing work in Express.js?**
+   - Routing refers to determining how an application responds to client requests to a particular URL endpoint and HTTP method. The syntax for routing in Express is:
+     ```js
+     app.get('/path', (req, res) => {
+         res.send('Hello World');
+     });
+     ```
+   - You can define different routes based on HTTP methods such as `GET`, `POST`, `PUT`, and `DELETE`.
+
+### 6. **How do you serve static files in Express.js?**
+   - Express.js has a built-in middleware function `express.static()` to serve static files (CSS, JavaScript, images) in a directory. Example:
+     ```js
+     app.use(express.static('public'));
+     ```
+   - This will allow you to serve files located in the `/public` directory.
+
+### 7. **What is `next()` in Express.js?**
+   - `next()` is a function in Express that is used to pass control to the next middleware or route handler in the application. Without calling `next()`, the request-response cycle will not proceed, and the request will be left hanging.
+
+### 8. **How do you handle errors in Express.js?**
+   - Express.js provides a way to handle errors through middleware. You define error-handling middleware by using four arguments (`err`, `req`, `res`, `next`):
+     ```js
+     app.use((err, req, res, next) => {
+         console.error(err.stack);
+         res.status(500).send('Something broke!');
+     });
+     ```
+
+### 9. **What is the difference between `app.use()` and `app.get()` in Express.js?**
+   - `app.use()` is a method for mounting middleware functions at a specific path (or globally). It can handle requests of any HTTP method.
+   - `app.get()` is specifically used to define a route for handling HTTP `GET` requests.
+
+### 10. **How can you handle form data in Express.js?**
+   - Express.js uses middleware to handle form data:
+     - **For URL-encoded data**: Use `express.urlencoded({ extended: true })` to parse form submissions.
+     - **For JSON data**: Use `express.json()` to handle JSON payloads.
+     ```js
+     app.use(express.urlencoded({ extended: true }));
+     app.use(express.json());
+     ```
+
+### 11. **How do you implement authentication in Express.js?**
+   - Authentication can be handled in Express.js using libraries such as **Passport.js** or **JWT** (JSON Web Tokens).
+     - **Passport.js** integrates seamlessly with Express to provide authentication strategies (e.g., OAuth, Google, Facebook).
+     - **JWT** is often used for stateless, token-based authentication, where tokens are generated and verified during API requests.
+
+### 12. **How do you implement session management in Express.js?**
+   - **Sessions** can be managed using the `express-session` package. Here’s an example:
+     ```js
+     const session = require('express-session');
+     app.use(session({
+         secret: 'your-secret-key',
+         resave: false,
+         saveUninitialized: true
+     }));
+     ```
+
+### 13. **What are Express.js templates, and how do you use them?**
+   - Templates allow you to dynamically generate HTML based on your data. Express supports several template engines like **Pug**, **EJS**, and **Handlebars**.
+     ```js
+     app.set('view engine', 'pug');
+     app.get('/home', (req, res) => {
+         res.render('index', { title: 'Home' });
+     });
+     ```
+
+### 14. **How do you use query parameters in Express.js?**
+   - Query parameters are passed as part of the URL. In Express, you can access them via `req.query`:
+     ```js
+     app.get('/search', (req, res) => {
+         const query = req.query.q;
+         res.send(`Search query: ${query}`);
+     });
+     ```
+
+### 15. **How do you redirect in Express.js?**
+   - You can use the `res.redirect()` method to redirect users to another route or URL:
+     ```js
+     app.get('/old-page', (req, res) => {
+         res.redirect('/new-page');
+     });
+     ```
+
+======================
+
+ **Node.js** interview questions 
+
+### 1. **What is Node.js?**
+   - **Node.js** is a runtime environment based on **Chrome's V8 JavaScript engine**. It allows you to run JavaScript on the server side. It is designed for building scalable network applications, particularly for handling I/O operations such as reading or writing to the filesystem, interacting with databases, and handling HTTP requests.
+
+### 2. **What are the key features of Node.js?**
+   - **Asynchronous and Event-driven**: Node.js uses an event-driven, non-blocking I/O model which makes it lightweight and efficient.
+   - **Single-threaded**: Even though it operates on a single thread, Node.js can handle many connections concurrently thanks to its event-driven architecture.
+   - **Cross-platform**: Node.js can be run on Windows, macOS, and Linux.
+   - **V8 Engine**: It uses Google Chrome’s V8 engine to execute JavaScript code.
+
+### 3. **What is the difference between Node.js and JavaScript?**
+   - **JavaScript** is a scripting language that is primarily used for client-side development (executed in the browser).
+   - **Node.js** is a runtime that allows JavaScript to run on the server-side or outside the browser.
+
+### 4. **What is the event loop in Node.js?**
+   - The **event loop** is a fundamental concept in Node.js. It is a mechanism that allows Node.js to perform non-blocking I/O operations by offloading operations to the system kernel whenever possible. The event loop constantly checks if there are tasks to execute (e.g., I/O operations, timeouts), and it processes them as they complete.
+
+### 5. **Explain what is meant by "non-blocking" in Node.js.**
+   - In a **non-blocking** architecture, Node.js does not wait for tasks (like I/O operations) to finish. Instead, it moves to the next task while allowing the previous one to complete in the background, eventually handling the result using callbacks, promises, or async/await.
+
+### 6. **What is the role of callbacks in Node.js?**
+   - **Callbacks** are functions passed as arguments to other functions, to be invoked after an operation completes. Since Node.js operations are non-blocking, callbacks are frequently used to handle the results of asynchronous tasks.
+
+### 7. **What are promises in Node.js?**
+   - **Promises** are objects representing the eventual completion or failure of an asynchronous operation. Promises provide a cleaner way to handle asynchronous code compared to callbacks.
+     ```js
+     new Promise((resolve, reject) => {
+         // async operation
+     }).then(result => {
+         // success
+     }).catch(error => {
+         // failure
+     });
+     ```
+
+### 8. **What is `async/await` in Node.js?**
+   - `async/await` is syntactic sugar built on top of Promises, allowing you to write asynchronous code that looks synchronous.
+     ```js
+     async function fetchData() {
+         try {
+             const result = await someAsyncFunction();
+             console.log(result);
+         } catch (error) {
+             console.error(error);
+         }
+     }
+     ```
+
+### 9. **What is `require()` in Node.js?**
+   - The `require()` function is used to **import** modules, libraries, or files in Node.js. For example, you can import core modules, third-party modules, or your own modules:
+     ```js
+     const fs = require('fs'); // Import the built-in file system module
+     ```
+
+### 10. **What are the differences between `require()` and `import`?**
+   - **`require()`** is the older CommonJS syntax, while **`import`** is part of ES6 modules.
+   - **`require()`** is synchronous, while **`import`** is asynchronous.
+   - **`require()`** works out-of-the-box in Node.js, but **`import`** requires the use of the `type: module` field in `package.json` or the `.mjs` file extension.
+
+### 11. **What is the `package.json` file in Node.js?**
+   - The `package.json` file is a central file in any Node.js project that contains metadata about the project. It includes information such as:
+     - Project name, version, description.
+     - List of dependencies (third-party packages).
+     - Scripts for automation (e.g., start, test).
+     - Project author, license, etc.
+
+### 12. **How do you handle errors in Node.js?**
+   - In Node.js, errors can be handled using:
+     - **Callbacks**: The first argument is often the error object.
+     - **Promises**: Use `.catch()` to handle errors.
+     - **`try...catch` blocks**: Used with `async/await` to catch exceptions in asynchronous functions.
+
+### 13. **What are streams in Node.js?**
+   - **Streams** are objects that allow you to read data from a source or write data to a destination in a continuous fashion. They are particularly useful for handling large files. Types of streams include:
+     - **Readable**: Used for reading operations (e.g., file streams).
+     - **Writable**: Used for writing operations.
+     - **Duplex**: Used for both reading and writing (e.g., TCP sockets).
+     - **Transform**: A type of duplex stream where the output is modified based on input (e.g., zlib compression).
+
+### 14. **What are the different types of modules in Node.js?**
+   - **Core modules**: Modules provided by Node.js (e.g., `http`, `fs`, `path`).
+   - **Third-party modules**: Modules installed from npm (e.g., `express`, `mongoose`).
+   - **Local modules**: Modules you create in your application.
+
+### 15. **What is the difference between `process.nextTick()` and `setImmediate()`?**
+   - **`process.nextTick()`** is used to execute a callback immediately after the current operation completes but before any I/O tasks.
+   - **`setImmediate()`** is used to execute a callback after the I/O operations have completed in the event loop's next iteration.
+
+### 16. **What are Node.js buffers?**
+   - A **Buffer** is a class in Node.js designed to handle binary data. Buffers are especially useful when dealing with data from streams or I/O operations, such as file manipulation.
+
+### 17. **What is the difference between `spawn()` and `exec()` in Node.js?**
+   - **`spawn()`** launches a new process with a given command. It returns a stream for data I/O and is better suited for handling large outputs.
+   - **`exec()`** runs a command in a shell and buffers the output in memory, returning it in a callback. It's simpler to use but less efficient for large outputs.
+
+### 18. **How do you manage dependencies in a Node.js project?**
+   - Dependencies are managed using **npm** or **yarn**. Common commands include:
+     - `npm install <package>`: Installs the package locally and adds it to `package.json`.
+     - `npm update`: Updates installed packages to the latest version.
+     - `npm uninstall <package>`: Removes a package and its reference from `package.json`.
+
+### 19. **What is middleware in Node.js?**
+   - Middleware is commonly used in frameworks like **Express.js**. It refers to functions that process HTTP requests before they reach the final request handler. They can modify `req` and `res` objects or end the request-response cycle.
+
+### 20. **What are the advantages of using Node.js?**
+   - **Non-blocking, asynchronous operations** allow Node.js to handle many requests at the same time.
+   - **JavaScript on both the client and server sides** promotes code reusability.
+   - **Large community support** with plenty of libraries and frameworks available via npm.
+   - **Scalability** for handling large-scale, high-throughput applications.
+
+---
+====================
+
+
+ **React.js interview questions** 
+
+### Basic Questions
+
+1. **What is React?**  
+   React is a JavaScript library for building user interfaces, mainly for single-page applications. It allows developers to create reusable UI components.
+
+2. **What are the key features of React?**  
+   Key features include Virtual DOM, JSX (JavaScript XML), one-way data binding, and component-based architecture.
+
+3. **What is the Virtual DOM?**  
+   The Virtual DOM is a lightweight representation of the actual DOM that React uses to update UI elements efficiently by comparing changes and updating only the necessary parts.
+
+4. **What is JSX?**  
+   JSX stands for JavaScript XML, a syntax extension for JavaScript that looks similar to HTML and is used in React to describe the UI components.
+
+5. **What is the difference between a functional and class component in React?**  
+   Functional components are stateless and are written as functions, while class components are stateful and use ES6 class syntax. With React Hooks, functional components can now manage state.
+
+### Intermediate Questions
+6. **What are React Hooks?**  
+   Hooks are functions that let you use React features, like state and lifecycle methods, in functional components. Examples include `useState`, `useEffect`, and `useContext`.
+
+7. **What is the useEffect hook?**  
+   The `useEffect` hook is used for side effects like fetching data, updating the DOM, or subscribing to data streams in functional components. It can run after the initial render and on subsequent updates.
+
+8. **What is the difference between controlled and uncontrolled components?**  
+   - **Controlled components**: The form data is handled by the state in React.
+   - **Uncontrolled components**: The form data is handled by the DOM itself, and you use `ref` to get the value.
+
+9. **What are higher-order components (HOCs)?**  
+   HOCs are functions that take a component and return a new component, often used for reusing component logic across multiple components.
+
+10. **What is Redux, and how does it work with React?**  
+    Redux is a state management library that can be used with React to handle application-wide state. It follows a unidirectional data flow: actions are dispatched, reducers update the state, and the store holds the state, which components access via `connect()` or `useSelector()`.
+
+### Advanced Questions
+11. **What is the Context API?**  
+    The Context API allows for the global sharing of state across components without passing props manually at every level, which helps avoid "prop drilling."
+
+12. **What is the difference between useCallback and useMemo?**  
+    - `useCallback`: Memorizes a function so that it’s not recreated on every render.
+    - `useMemo`: Memorizes the result of a computation to avoid expensive recalculations.
+
+13. **What are React fragments, and why are they used?**  
+    React Fragments (`<></>`) allow you to return multiple elements from a component without adding extra nodes to the DOM, preventing unnecessary div wrappers.
+
+14. **What is the purpose of keys in React?**  
+    Keys help React identify which items in a list have changed, added, or removed, ensuring that the UI is updated efficiently. They must be unique and stable.
+
+15. **How does React handle updates to state?**  
+    React batches multiple state updates in event handlers and optimizes re-rendering by using the virtual DOM diffing algorithm to ensure that only the minimal number of DOM updates are performed.
+
+---
