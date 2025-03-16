@@ -9,7 +9,7 @@ $e="Completed";
 
 
 
-$conn=mysqli_connect("localhost","id14567499_mylog","Yashwantghole@123","id14567499_log");
+$conn=mysqli_connect("localhost","root","","hacker");
 //$conn=mysqli_connect("localhost","root","","student");
 
 if(!$conn)

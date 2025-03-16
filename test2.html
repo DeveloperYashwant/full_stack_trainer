@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashwant Software Solutions | Full Stack Training</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .navbar { background: rgba(0, 0, 0, 0.8); }
+        .hero { text-align: center; padding: 100px 20px; background: #007bff; color: white; }
+        .course-card { transition: transform 0.3s; }
+        .course-card:hover { transform: scale(1.05); }
+        .reviews { background: #f8f9fa; padding: 40px 20px; }
+        .review-card { border-left: 5px solid #007bff; padding: 15px; background: white; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Yashwant Software Solutions</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Master Full Stack Development</h1>
+        <p>Join our industry-leading training programs and upgrade your skills!</p>
+        <a href="#courses" class="btn btn-light btn-lg">Explore Courses</a>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="container mt-5">
+        <h2 class="text-center mb-4">Our Courses</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Full Stack Web Development</h5>
+                        <p class="card-text">Master HTML, CSS, JavaScript, React, Node.js, and more.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Python for Data Science</h5>
+                        <p class="card-text">Learn Pandas, NumPy, Matplotlib, and AI concepts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Java & Spring Boot</h5>
+                        <p class="card-text">Build enterprise applications with Java, Hibernate, and Spring Boot.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2 class="text-center mb-4">What Our Students Say</h2>
+            <div class="review-card">
+                <p><strong>Rahul M.</strong>: "The Full Stack course was outstanding! Highly recommended."</p>
+            </div>
+            <div class="review-card">
+                <p><strong>Anjali S.</strong>: "Great hands-on projects, excellent mentoring!"</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Yashwant Software Solutions. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && (event.key === "u" || event.key === "U")) {
+                event.preventDefault();
+                alert("View Source is disabled!");
+            }
+        });
+    </script>
+</body>
+</html>
